@@ -1,0 +1,15 @@
+{
+  "imports": {
+    "hono": "https://deno.land/x/hono@v4.1.5/mod.ts",
+    "supabase": "npm:@supabase/supabase-js@2.41.1",
+    "hono/jsx/jsx-runtime": "https://deno.land/x/hono@v4.1.5/jsx/jsx-runtime.ts"
+  },
+  "tasks": {
+    "dev": "deno run --allow-net --watch main.ts",
+    "start": "deno run --allow-net main.ts"
+  },
+  "compilerOptions": {
+    "jsx": "precompile",
+    "jsxImportSource": "hono/jsx"
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "version": "3",
+  "packages": {
+    "specifiers": {
+      "npm:@supabase/supabase-js@2.41.1": "npm:@supabase/supabase-js@2.41.1",
+      "npm:@types/node": "npm:@types/node@18.16.19"
+    },
+    "npm": {
+      "@supabase/auth-js@2.63.0": {
+        "integrity": "sha512-yIgcHnlgv24GxHtVGUhwGqAFDyJkPIC/xjx7HostN08A8yCy8HIfl4JEkTKyBqD1v1L05jNEJOUke4Lf4O1+Qg==",
+        "dependencies": {
+          "@supabase/node-fetch": "@supabase/node-fetch@2.6.15"
+        }
+      },
+      "@supabase/functions-js@2.2.2": {
+        "integrity": "sha512-sJGq1nludmi7pY/fdtCpyY/pYonx7MfHdN408bqb736guWcVI1AChYVbI4kUM978EuOE4Ci6l7bUudfGg07QRw==",
+        "dependencies": {
+          "@supabase/node-fetch": "@supabase/node-fetch@2.6.15"
+        }
+      },
+      "@supabase/node-fetch@2.6.15": {
+        "integrity": "sha512-1ibVeYUacxWYi9i0cf5efil6adJ9WRyZBLivgjs+AUpewx1F3xPi7gLgaASI2SmIQxPoCEjAsLAzKPgMJVgOUQ==",
+        "dependencies": {
+          "whatwg-url": "whatwg-url@5.0.0"
+        }
+      },
+      "@supabase/postgrest-js@1.9.2": {
+        "integrity": "sha512-I6yHo8CC9cxhOo6DouDMy9uOfW7hjdsnCxZiaJuIVZm1dBGTFiQPgfMa9zXCamEWzNyWRjZvupAUuX+tqcl5Sw==",
+        "dependencies": {
+          "@supabase/node-fetch": "@supabase/node-fetch@2.6.15"
+        }
+      },
+      "@supabase/realtime-js@2.9.3": {
+        "integrity": "sha512-lAp50s2n3FhGJFq+wTSXLNIDPw5Y0Wxrgt44eM5nLSA3jZNUUP3Oq2Ccd1CbZdVntPCWLZvJaU//pAd2NE+QnQ==",
+        "dependencies": {
+          "@supabase/node-fetch": "@supabase/node-fetch@2.6.15",
+          "@types/phoenix": "@types/phoenix@1.6.4",
+          "@types/ws": "@types/ws@8.5.10",
+          "ws": "ws@8.16.0"
+        }
+      },
+      "@supabase/storage-js@2.5.5": {
+        "integrity": "sha512-OpLoDRjFwClwc2cjTJZG8XviTiQH4Ik8sCiMK5v7et0MDu2QlXjCAW3ljxJB5+z/KazdMOTnySi+hysxWUPu3w==",
+        "dependencies": {
+          "@supabase/node-fetch": "@supabase/node-fetch@2.6.15"
+        }
+      },
+      "@supabase/supabase-js@2.41.1": {
+        "integrity": "sha512-xmECLhYugMo/6SObpsOhu5xaxVfsk+JK/d4JSh055bpESmgmN3PLpzbfqejKCpaUeeUNF21+lrJp/U9HQzT9mA==",
+        "dependencies": {
+          "@supabase/auth-js": "@supabase/auth-js@2.63.0",
+          "@supabase/functions-js": "@supabase/functions-js@2.2.2",
+          "@supabase/node-fetch": "@supabase/node-fetch@2.6.15",
+          "@supabase/postgrest-js": "@supabase/postgrest-js@1.9.2",
+          "@supabase/realtime-js": "@supabase/realtime-js@2.9.3",
+          "@supabase/storage-js": "@supabase/storage-js@2.5.5"
+        }
+      },
+      "@types/node@18.16.19": {
+        "integrity": "sha512-IXl7o+R9iti9eBW4Wg2hx1xQDig183jj7YLn8F7udNceyfkbn1ZxmzZXuak20gR40D7pIkIY1kYGx5VIGbaHKA==",
+        "dependencies": {}
+      },
+      "@types/phoenix@1.6.4": {
+        "integrity": "sha512-B34A7uot1Cv0XtaHRYDATltAdKx0BvVKNgYNqE4WjtPUa4VQJM7kxeXcVKaH+KS+kCmZ+6w+QaUdcljiheiBJA==",
+        "dependencies": {}
+      },
+      "@types/ws@8.5.10": {
+        "integrity": "sha512-vmQSUcfalpIq0R9q7uTo2lXs6eGIpt9wtnLdMv9LVpIjCA/+ufZRozlVoVelIYixx1ugCBKDhn89vnsEGOCx9A==",
+        "dependencies": {
+          "@types/node": "@types/node@18.16.19"
+        }
+      },
+      "tr46@0.0.3": {
+        "integrity": "sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==",
+        "dependencies": {}
+      },
+      "webidl-conversions@3.0.1": {
+        "integrity": "sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==",
+        "dependencies": {}
+      },
+      "whatwg-url@5.0.0": {
+        "integrity": "sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==",
+        "dependencies": {
+          "tr46": "tr46@0.0.3",
+          "webidl-conversions": "webidl-conversions@3.0.1"
+        }
+      },
+      "ws@8.16.0": {
+        "integrity": "sha512-HS0c//TP7Ina87TfiPUz1rQzMhHrl/SG2guqRcTOIUYD2q8uhUdNHZYJUaQ8aTGPzCh+c6oawMKW35nFl1dxyQ==",
+        "dependencies": {}
+      }
+    }
+  },
+  "redirects": {
+    "https://deno.land/x/ky/source/index.ts": "https://deno.land/x/ky@v1.2.3/source/index.ts",
+    "https://esm.sh/ky": "https://esm.sh/ky@1.2.3"
+  },
+  "remote": {
+    "https://deno.land/std@0.203.0/dotenv/load.ts": "0636983549b98f29ab75c9a22a42d9723f0a389ece5498fe971e7bb2556a12e2",
+    "https://deno.land/std@0.203.0/dotenv/mod.ts": "1da8c6d0e7f7d8a5c2b19400b763bc11739df24acec235dda7ea2cfd3d300057",
+    "https://deno.land/x/hono@v4.1.5/client/client.ts": "b9d07d47a7b23f007fb2ea29a3185885e85a963a63b0f921f93ae2981ee29cda",
+    "https://deno.land/x/hono@v4.1.5/client/index.ts": "30def535310a37bede261f1b23d11a9758983b8e9d60a6c56309cee5f6746ab2",
+    "https://deno.land/x/hono@v4.1.5/client/utils.ts": "a93e5dc542dceb892a6b39cc793689478627ba958d251794193cf26c0ecf5800",
+    "https://deno.land/x/hono@v4.1.5/compose.ts": "37d6e33b7db80e4c43a0629b12fd3a1e3406e7d9e62a4bfad4b30426ea7ae4f1",
+    "https://deno.land/x/hono@v4.1.5/context.ts": "3d8c8a1aaea396fe22e2db822e1a270482c7f4b3b273f8f05ae3b240408bc7b2",
+    "https://deno.land/x/hono@v4.1.5/helper/cookie/index.ts": "80b98f8a014e8b03a9130cce9fb03f6175f82a64367e954d120634f8543556e2",
+    "https://deno.land/x/hono@v4.1.5/hono-base.ts": "2a508c026687a1fc12c0458e100e66d5d72e17f6e6532b407d19663aa7300327",
+    "https://deno.land/x/hono@v4.1.5/hono.ts": "23edd0140bf0bd5a68c14ae96e5856a5cec6b844277e853b91025e91ea74f416",
+    "https://deno.land/x/hono@v4.1.5/http-exception.ts": "cd387c6f7357db375ac3375f0346c6da80b46193b661881f660d6b15293fc086",
+    "https://deno.land/x/hono@v4.1.5/mod.ts": "35fd2a2e14b52365e0ad66f168b067363fd0a60d75cbcb1b01685b04de97d60e",
+    "https://deno.land/x/hono@v4.1.5/request.ts": "9c8061eaf4373aa122a77d1aa8e888397425bc5d78bc17c87a2c861375c4f0b3",
+    "https://deno.land/x/hono@v4.1.5/router.ts": "880316f561918fc197481755aac2165fdbe2f530b925c5357a9f98d6e2cc85c7",
+    "https://deno.land/x/hono@v4.1.5/router/linear-router/index.ts": "8a2a7144c50b1f4a92d9ee99c2c396716af144c868e10608255f969695efccd0",
+    "https://deno.land/x/hono@v4.1.5/router/linear-router/router.ts": "928d29894e4b45b047a4f453c7f1745c8b1869cd68447e1cb710c7bbf99a4e29",
+    "https://deno.land/x/hono@v4.1.5/router/pattern-router/index.ts": "304a66c50e243872037ed41c7dd79ed0c89d815e17e172e7ad7cdc4bc07d3383",
+    "https://deno.land/x/hono@v4.1.5/router/pattern-router/router.ts": "1b5f68e6af942579d3a40ee834294fea3d1f05fd5f70514e46ae301dd0107e46",
+    "https://deno.land/x/hono@v4.1.5/router/reg-exp-router/index.ts": "52755829213941756159b7a963097bafde5cc4fc22b13b1c7c9184dc0512d1db",
+    "https://deno.land/x/hono@v4.1.5/router/reg-exp-router/node.ts": "7efaa6f4301efc2aad0519c84973061be8555da02e5868409293a1fd98536aaf",
+    "https://deno.land/x/hono@v4.1.5/router/reg-exp-router/router.ts": "632f2fa426b3e45a66aeed03f7205dad6d13e8081bed6f8d1d987b6cad8fb455",
+    "https://deno.land/x/hono@v4.1.5/router/reg-exp-router/trie.ts": "852ce7207e6701e47fa30889a0d2b8bfcd56d8862c97e7bc9831e0a64bd8835f",
+    "https://deno.land/x/hono@v4.1.5/router/smart-router/index.ts": "74f9b4fe15ea535900f2b9b048581915f12fe94e531dd2b0032f5610e61c3bef",
+    "https://deno.land/x/hono@v4.1.5/router/smart-router/router.ts": "f1848a2a1eefa316a11853ae12e749552747771fb8a11fe713ae04ea6461140b",
+    "https://deno.land/x/hono@v4.1.5/router/trie-router/index.ts": "3eb75e7f71ba81801631b30de6b1f5cefb2c7239c03797e2b2cbab5085911b41",
+    "https://deno.land/x/hono@v4.1.5/router/trie-router/node.ts": "5786ed7b85bb55411ede249a381412d39406497285ce23c1eafd50551dcdc632",
+    "https://deno.land/x/hono@v4.1.5/router/trie-router/router.ts": "54ced78d35676302c8fcdda4204f7bdf5a7cc907fbf9967c75674b1e394f830d",
+    "https://deno.land/x/hono@v4.1.5/utils/body.ts": "1c7013f83bbef8216b3d862111efd5a183eaa29e86decf9a7eec6cdf25757e93",
+    "https://deno.land/x/hono@v4.1.5/utils/buffer.ts": "9066a973e64498cb262c7e932f47eed525a51677b17f90893862b7279dc0773e",
+    "https://deno.land/x/hono@v4.1.5/utils/cookie.ts": "6eaaf6909a4ae11f6c82404e9398e1c247e3f1854d73994a9e2e6fc3cdf7b584",
+    "https://deno.land/x/hono@v4.1.5/utils/crypto.ts": "bda0e141bbe46d3a4a20f8fbcb6380d473b617123d9fdfa93e4499410b537acc",
+    "https://deno.land/x/hono@v4.1.5/utils/html.ts": "6ea4f6bf41587a51607dff7a6d2865ef4d5001e4203b07e5c8a45b63a098e871",
+    "https://deno.land/x/hono@v4.1.5/utils/url.ts": "855169632c61d03703bd08cafb27664ba3fdb352892f01687d5cce8fd49e3cb1",
+    "https://deno.land/x/hono@v4.1.5/validator/index.ts": "6c986e8b91dcf857ecc8164a506ae8eea8665792a4ff7215471df669c632ae7c",
+    "https://deno.land/x/hono@v4.1.5/validator/validator.ts": "5dd53421e374bb6323fdd6208473fb061a287251075bc4e23f25c10b18c93609",
+    "https://esm.sh/ky@1.2.3": "56edb0459067654180fbfd1c8f63bf1b9eef47b86e1d4214f20bfbe0c0fab3fc",
+    "https://esm.sh/v135/ky@1.2.3/denonext/ky.mjs": "8078c21e218d07c5eeb60e06d6869d953dcf279851375a4567730b4f70e92810"
+  },
+  "workspace": {
+    "dependencies": [
+      "npm:@supabase/supabase-js@2.41.1"
+    ]
+  }
+}
