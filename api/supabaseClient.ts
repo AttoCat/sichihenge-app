@@ -1,4 +1,3 @@
-import "https://deno.land/std@0.203.0/dotenv/load.ts";
 import { createClient } from "supabase";
 
 const supabaseUrl = Deno.env.get("SUPABASE_URL") as string;
