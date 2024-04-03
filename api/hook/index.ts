@@ -1,5 +1,4 @@
 import { Hono } from "hono";
-import "https://deno.land/std@0.203.0/dotenv/load.ts";
 import { hmac } from "../hmac.ts";
 import { replyMessage } from "../reply.ts";
 import { MessageEvent, Webhook, WebhookEvent } from "../types.ts";
