@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import { hmac } from "../hmac.ts";
 import { replyMessage } from "../reply.ts";
 import { MessageEvent, Webhook, WebhookEvent } from "../types.ts";
-import { createLinkButton, issueLinkToken } from "./login.ts";
+import { createLinkButton, issueLinkToken } from "./link.ts";
 
 export const hook = new Hono();
 const CHANNEL_SECRET = Deno.env.get("CHANNEL_SECRET");
