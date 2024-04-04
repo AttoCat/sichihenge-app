@@ -32,7 +32,7 @@ export const createLinkButton = (baseUrl: string, linkToken: string) => {
       "actions": [{
         "type": "uri",
         "label": "Account Link",
-        "uri": `${domain}/link?linkToken=${linkToken}`,
+        "uri": `${domain}/login?linkToken=${linkToken}`,
       }],
     },
   };
