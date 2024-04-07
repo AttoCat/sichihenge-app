@@ -52,6 +52,7 @@ hook.post("*", async (c) => {
     if (accountLinkEvent.link.result !== "ok") continue;
     const nonce = accountLinkEvent.link.nonce;
     const lineId = accountLinkEvent.source?.userId;
+    console.log(lineId);
     const kv = await Deno.openKv();
     const userId = await kv.get([nonce]);
     console.log(userId);
