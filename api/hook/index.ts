@@ -58,7 +58,7 @@ hook.post("*", async (c) => {
     console.log(userId);
     await kv.close();
     const { data, error } = await supabase.from("profiles").update({
-      "line_id": lineId,
+      line_id: lineId,
     }).eq("id", userId);
     console.log(error);
   }
