@@ -53,8 +53,9 @@ hook.post("*", async (c) => {
     const nonce = accountLinkEvent.link.nonce;
     const lineId = accountLinkEvent.source?.userId;
     const kv = await Deno.openKv();
-    const userId = (await kv.get([nonce])).value;
-    console.log(lineId, "+", userId);
+    const result = await kv.get<string>([nonce]);
+    const userId = result.value;
+    console.log(lineId, "+", userId, "+", result.versionstamp);
     await kv.close();
     const { error } = await supabase.from("profiles").update({
       line_id: lineId,
