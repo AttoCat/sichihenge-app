@@ -1,7 +1,13 @@
 import { Hono } from "hono";
 import { hmac } from "../hmac.ts";
 import { replyMessage } from "../reply.ts";
-import { MessageEvent, Webhook, WebhookEvent } from "../types.ts";
+import { supabase } from "../supabaseClient.ts";
+import {
+  AccountLinkEvent,
+  MessageEvent,
+  Webhook,
+  WebhookEvent,
+} from "../types.ts";
 import { createLinkButton, issueLinkToken } from "./link.ts";
 
 export const hook = new Hono();
@@ -10,6 +16,9 @@ const CHANNEL_ACCESS_TOKEN = Deno.env.get("CHANNEL_ACCESS_TOKEN");
 
 const isMessageEvent = (event: WebhookEvent): event is MessageEvent =>
   event.type === "message";
+
+const isAccountLinkEvent = (event: WebhookEvent): event is AccountLinkEvent =>
+  event.type === "accountLink";
 
 hook.post("*", async (c) => {
   const body = await c.req.json<Webhook>();
@@ -20,6 +29,7 @@ hook.post("*", async (c) => {
   }
   const events = body.events;
   const messageEvents = events.filter(isMessageEvent);
+  const accountLinkEvents = events.filter(isAccountLinkEvent);
   for (const messageEvent of messageEvents) {
     if (messageEvent.message.type !== "text") continue;
     const message = messageEvent.message.text;
@@ -37,5 +47,17 @@ hook.post("*", async (c) => {
         [buttonMessage],
       );
     }
+  }
+  for (const accountLinkEvent of accountLinkEvents) {
+    if (accountLinkEvent.link.result !== "ok") continue;
+    const nonce = accountLinkEvent.link.nonce;
+    const lineId = accountLinkEvent.source?.userId;
+    const kv = await Deno.openKv();
+    const userId = await kv.get([nonce]);
+    await kv.close();
+    const { data, error } = await supabase.from("profiles").update({
+      "line_id": lineId,
+    }).match({ "id": userId });
+    console.log(data);
   }
 });

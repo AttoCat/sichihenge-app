@@ -50,7 +50,7 @@ export interface Webhook {
 export interface WebhookEvent {
   type: "message" | string;
   mode: "active" | "stanby";
-  timestam: number;
+  timestamp: number;
   source?: WebhookSource;
   webhookEventId: string;
   deliveryContext: { isRedelivery: boolean };
@@ -73,6 +73,12 @@ export interface MessageEvent extends WebhookEvent {
     | AudioEventMessage
     | FileEventMessage
     | LocationEventMessage;
+}
+
+export interface AccountLinkEvent extends WebhookEvent {
+  type: "accountLink";
+  replyToken: string;
+  link: { result: "ok" | "failed"; nonce: string };
 }
 
 export interface TextEventMessage {
