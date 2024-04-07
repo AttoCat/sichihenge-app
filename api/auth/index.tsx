@@ -7,7 +7,6 @@ export const auth = new Hono();
 auth.post("/login", async (c) => {
   const domain = new URL(c.req.url).origin;
   const { email, password, linkToken } = await c.req.json();
-  console.log(email, password, linkToken);
   const { data, error } = await supabase.auth.signInWithPassword({
     email: email,
     password: password,
@@ -73,22 +72,34 @@ auth.post("/login", async (c) => {
         <span>
           ログインに成功しました。続いて下のボタンから連携を行ってください。
         </span>
-        </div>
-        <br />
-        <button
-          class="btn btn-outline btn-success"
-          onclick={
-            "location.href=" +
-            "'" +
-            "https://access.line.me/dialog/bot/accountLink?linkToken=" +
-            linkToken +
-            "&nonce=" +
-            nonce +
-            "'"
-          }
-        >
-          連携する
-        </button>
       </div>
+      <br />
+      <button
+        class="btn btn-outline btn-success"
+        onclick={
+          "location.href=" +
+          "'" +
+          "https://access.line.me/dialog/bot/accountLink?linkToken=" +
+          linkToken +
+          "&nonce=" +
+          nonce +
+          "'"
+        }
+      >
+        連携する
+      </button>
+    </div>
   );
+});
+
+auth.post("/signup", async (c) => {
+  const { email, password } = await c.req.json();
+  const { data, error } = await supabase.auth.signUp({
+    email: email,
+    password: password,
+  });
+  if (error){
+    return c.text("Failed to signup",401)
+  }
+  return c.text("Success to signup",201)
 });
