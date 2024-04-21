@@ -42,7 +42,8 @@ hook.post("*", async (c) => {
       if (await checkLinked(userId)) {
         const data: TextMessage = {
           type: "text",
-          text: "すでに連携済みです。",
+          text:
+            "すでに連携済みです。解除する場合 #アカウント連携解除 と送信してください。",
         };
         await replyMessage(CHANNEL_ACCESS_TOKEN!, messageEvent.replyToken, [
           data,
@@ -59,6 +60,17 @@ hook.post("*", async (c) => {
         messageEvent.replyToken,
         [buttonMessage],
       );
+    }
+    if (message == "#アカウント連携解除") {
+      await supabase.from("profiles").update({ line_id: null }).eq(
+        "line_id",
+        userId,
+      );
+      const data: TextMessage = {
+        type: "text",
+        text:
+          "連携を解除しました。再度連携する場合は画面下部のメニューをタップしてください。",
+      };
     }
     if (message == "#エントリー情報") {
       if (!await checkLinked(userId)) {
