@@ -93,15 +93,23 @@ auth.post("/login", async (c) => {
 });
 
 auth.post("/signup", async (c) => {
-  const { email, password, fullName, fullNameKana, handleName, privacy } =
-    await c.req.json<{
-      email: string;
-      password: string;
-      fullName: string;
-      fullNameKana: string;
-      handleName: string;
-      privacy: string;
-    }>();
+  const {
+    email,
+    password,
+    fullName,
+    fullNameKana,
+    handleName,
+    privacy,
+    school,
+  } = await c.req.json<{
+    email: string;
+    password: string;
+    fullName: string;
+    fullNameKana: string;
+    handleName: string;
+    privacy: string;
+    school: string;
+  }>();
   const { error: signUpError } = await supabase.auth.signUp({
     email: email,
     password: password,
@@ -121,6 +129,7 @@ auth.post("/signup", async (c) => {
       full_name_kana: fullNameKana,
       handle_name: handleName,
       privacy: privacy,
+      school: school,
     })
     .eq("email", email);
   if (registerInfoError) {
