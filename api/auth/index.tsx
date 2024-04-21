@@ -93,13 +93,51 @@ auth.post("/login", async (c) => {
 });
 
 auth.post("/signup", async (c) => {
-  const { email, password } = await c.req.json();
-  const { data, error } = await supabase.auth.signUp({
+  const { email, password, fullName, fullNameKana, handleName, privacy } =
+    await c.req.json<{
+      email: string;
+      password: string;
+      fullName: string;
+      fullNameKana: string;
+      handleName: string;
+      privacy: string;
+    }>();
+  const { error: signUpError } = await supabase.auth.signUp({
     email: email,
     password: password,
   });
-  if (error){
-    return c.text("Failed to signup",401)
+  if (signUpError) {
+    return c.text("Failed to signup", 401);
   }
-  return c.text("Success to signup",201)
+  const entryId = await getNextEntryId();
+  if (!entryId) {
+    return c.text("Can't get the entry_id", 401);
+  }
+  const { error: registerInfoError } = await supabase
+    .from("profiles")
+    .update({
+      entry_id: entryId,
+      full_name: fullName,
+      full_name_kana: fullNameKana,
+      handle_name: handleName,
+      privacy: privacy,
+    })
+    .eq("email", email);
+  if (registerInfoError) {
+    console.log(registerInfoError);
+  }
+  return c.text("Success to signup", 201);
 });
+
+const getNextEntryId = async () => {
+  const { data: lastUser } = await supabase
+    .from("profiles")
+    .select("entry_number")
+    .order("entry_number", { ascending: false })
+    .limit(1)
+    .single<{ entry_number: number }>();
+  if (!lastUser) {
+    return null;
+  }
+  return lastUser.entry_number + 1;
+};
