@@ -13,6 +13,7 @@ export const getUserInfo = async (
 };
 
 export const composeUserInfo = (user: Tables<"profiles">): TextMessage => {
+  const privacy = user.privacy === "" ? "全て本名を使用する" : user.privacy;
   const text = `あなたのエントリー情報は以下の通りです。
 
 エントリーナンバー: ${user.entry_number}
@@ -20,7 +21,7 @@ export const composeUserInfo = (user: Tables<"profiles">): TextMessage => {
 ふりがな: ${user.full_name_kana}
 ハンドルネーム: ${user.handle_name}
 所属教育機関: ${user.school}
-本名を使用しない場所: ${user.privacy}
+本名を使用しない場所: ${privacy}
 
 変更を希望する場合、公式Twitter(X)または sichihenge.cup@gmail.com までご連絡ください。
 
