@@ -110,6 +110,7 @@ auth.post("/signup", async (c) => {
     return c.text("Failed to signup", 401);
   }
   const entryNumber = await getNextEntryNumber();
+  console.log(entryNumber)
   if (!entryNumber) {
     return c.text("Can't get the entry_id", 401);
   }
