@@ -110,7 +110,6 @@ auth.post("/signup", async (c) => {
     return c.text("Failed to signup", 401);
   }
   const entryNumber = await getNextEntryNumber();
-  console.log(entryNumber)
   if (!entryNumber) {
     return c.text("Can't get the entry_id", 401);
   }
@@ -131,9 +130,10 @@ auth.post("/signup", async (c) => {
 });
 
 const getNextEntryNumber = async () => {
-  const { data: lastUser } = await supabase
+  const { data: lastUser, error } = await supabase
     .from("profiles")
     .select("entry_number")
+    .not("entry_number", "is", null)
     .order("entry_number", { ascending: false })
     .limit(1)
     .single<{ entry_number: number }>();
