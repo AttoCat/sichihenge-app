@@ -24,6 +24,8 @@ export const composeUserInfo = (user: Tables<"profiles">): TextMessage => {
   本名を使用しない場所: ${user.privacy}
 
   変更を希望する場合、公式Twitter(X)または sichihenge.cup@gmail.com までご連絡ください。
+  エントリーのキャンセルは以下のフォームからお願いします:
+  https://forms.gle/SrDiCZchXhxhRGdV9
   `;
   const message: TextMessage = { "type": "text", text: text };
   return message;
