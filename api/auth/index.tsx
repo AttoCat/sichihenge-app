@@ -109,14 +109,14 @@ auth.post("/signup", async (c) => {
   if (signUpError) {
     return c.text("Failed to signup", 401);
   }
-  const entryId = await getNextEntryId();
-  if (!entryId) {
+  const entryNumber = await getNextEntryNumber();
+  if (!entryNumber) {
     return c.text("Can't get the entry_id", 401);
   }
   const { error: registerInfoError } = await supabase
     .from("profiles")
     .update({
-      entry_id: entryId,
+      entry_number: entryNumber,
       full_name: fullName,
       full_name_kana: fullNameKana,
       handle_name: handleName,
@@ -129,7 +129,7 @@ auth.post("/signup", async (c) => {
   return c.text("Success to signup", 201);
 });
 
-const getNextEntryId = async () => {
+const getNextEntryNumber = async () => {
   const { data: lastUser } = await supabase
     .from("profiles")
     .select("entry_number")
