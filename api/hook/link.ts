@@ -10,9 +10,10 @@ export const checkLinked = async (userId: string) => {
   const { data } = await supabase.from("profiles").select("line_id").eq(
     "line_id",
     userId,
-  );
-  console.log(data);
-  return data != null;
+  ).single();
+  if (data == null) return false;
+  if (data.line_id == null) return false;
+  return true;
 };
 
 export const issueLinkToken = async (
