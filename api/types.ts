@@ -2,7 +2,62 @@ export interface BaseMessage {
   type: string;
 }
 
-export interface FlexCarouselMessage {
+export interface TextMessage extends BaseMessage {
+  type: "text";
+  text: string;
+  emojis?: Array<
+    { index: number; length: number; productId: string; emojiId: string }
+  >;
+  quoteToken?: string;
+}
+export interface TemplateMessage extends BaseMessage {
+  type: "template";
+  altText: string;
+  template:
+    | ButtonTemplate
+    | ConfirmTemplate
+    | CarouselTemplate
+    | ImageCarouselTemplate;
+}
+
+export interface ButtonTemplate {
+  type: "buttons";
+  thumbnailImageUrl?: string;
+  imageAspectRatio?: "rectangle" | "square";
+  imageSize?: "cover" | "contain";
+  title?: string;
+  text: string;
+  defaultAction?: Action;
+  actions: Action[];
+}
+
+export interface ConfirmTemplate {
+  type: "confirm";
+  text: string;
+  actions: Action[];
+}
+
+export interface CarouselTemplate {
+  type: "carousel";
+  columns: Column[];
+}
+
+export interface ImageCarouselTemplate {
+  type: "image_carousel";
+  columns: ImageColumn[];
+}
+export interface Column {
+  imageBackgroundColor?: string;
+  title?: string;
+  text: string;
+  defaultAction: Action;
+  actions: Action[];
+}
+export interface ImageColumn {
+  imageUrl: string;
+  action: Action;
+}
+export interface FlexCarouselMessage extends BaseMessage {
   type: "carousel";
   contents: FlexMessageBubble[];
 }
@@ -36,10 +91,19 @@ export interface FlexMessageContent {
   wrap?: boolean;
 }
 
-export interface Action {
-  type: string;
+type Action = MessageAction | URIAction;
+
+export interface MessageAction {
+  type: "message";
   label: string;
   text: string;
+}
+
+export interface URIAction {
+  type: "uri";
+  label: string;
+  uri: string;
+  altUri?: { desktop: string };
 }
 
 export interface Webhook {
@@ -84,6 +148,7 @@ export interface AccountLinkEvent extends WebhookEvent {
 export interface TextEventMessage {
   id: string;
   type: "text";
+  quoteToken: string;
   text: string;
   emojis?: Array<
     { index: number; length: number; productId: string; emojiId: string }
@@ -93,6 +158,7 @@ export interface TextEventMessage {
       { index: number; length: number; type: "user" | "all"; userId?: string }
     >;
   };
+  quotedMessageId?: string;
 }
 
 interface ImageEventMessage {

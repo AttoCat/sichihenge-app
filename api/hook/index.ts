@@ -5,10 +5,12 @@ import { supabase } from "../supabaseClient.ts";
 import {
   AccountLinkEvent,
   MessageEvent,
+  TextMessage,
   Webhook,
   WebhookEvent,
 } from "../types.ts";
-import { createLinkButton, issueLinkToken } from "./link.ts";
+import { checkLinked, createLinkButton, issueLinkToken } from "./link.ts";
+import { composeUserInfo, getUserInfo } from "./user.ts";
 
 export const hook = new Hono();
 const CHANNEL_SECRET = Deno.env.get("CHANNEL_SECRET");
@@ -32,35 +34,62 @@ hook.post("*", async (c) => {
   const accountLinkEvents = events.filter(isAccountLinkEvent);
   for (const messageEvent of messageEvents) {
     if (messageEvent.message.type !== "text") continue;
+    if (messageEvent.source === undefined) continue;
+    const userId = messageEvent.source.userId;
+    if (userId === undefined) continue;
     const message = messageEvent.message.text;
     if (message == "#アカウント連携") {
-      console.log("Success");
+      if (await checkLinked(userId)) {
+        const data: TextMessage = {
+          type: "text",
+          text: "すでに連携済みです。",
+        };
+        await replyMessage(CHANNEL_ACCESS_TOKEN!, messageEvent.replyToken, [
+          data,
+        ]);
+        continue;
+      }
       const linkToken = await issueLinkToken(
         CHANNEL_ACCESS_TOKEN!,
         messageEvent.source!.userId!,
       );
       const buttonMessage = createLinkButton(c.req.url, linkToken);
-      console.log(buttonMessage);
       await replyMessage(
         CHANNEL_ACCESS_TOKEN!,
         messageEvent.replyToken,
         [buttonMessage],
       );
     }
+    if (message == "#エントリー情報") {
+      if (!await checkLinked(userId)) {
+        const data: TextMessage = {
+          type: "text",
+          text: "まずはアカウント連携を行ってください。",
+        };
+        await replyMessage(CHANNEL_ACCESS_TOKEN!, messageEvent.replyToken, [
+          data,
+        ]);
+        continue;
+      }
+      const userInfo = await getUserInfo(userId);
+      if (!userInfo) continue;
+      await replyMessage(CHANNEL_ACCESS_TOKEN!, messageEvent.replyToken, [
+        composeUserInfo(userInfo),
+      ]);
+    }
   }
   for (const accountLinkEvent of accountLinkEvents) {
     if (accountLinkEvent.link.result !== "ok") continue;
     const nonce = accountLinkEvent.link.nonce;
-    console.log(nonce);
     const lineId = accountLinkEvent.source?.userId;
     const kv = await Deno.openKv();
-    const result = await kv.get<string>([nonce]);
+    const result = await kv.get<string>([nonce], { consistency: "eventual" });
     const userId = result.value;
-    console.log(lineId, "+", userId, "+", result.versionstamp);
+    if (!userId) continue;
     await kv.close();
     const { error } = await supabase.from("profiles").update({
       line_id: lineId,
     }).eq("id", userId);
-    console.log(error);
+    if (error) console.log(error);
   }
 });

@@ -1,7 +1,17 @@
 import ky from "https://esm.sh/ky";
+import { supabase } from "../supabaseClient.ts";
+import { TemplateMessage } from "../types.ts";
 type url = string;
 type linkTokenObject = {
   "linkToken": string;
+};
+
+export const checkLinked = async (userId: string) => {
+  const { data } = await supabase.from("profiles").select("line_id").eq(
+    "line_id",
+    userId,
+  ).returns<{ line_id: string }>();
+  return data !== null;
 };
 
 export const issueLinkToken = async (
@@ -21,7 +31,10 @@ export const issueLinkToken = async (
   return data.linkToken;
 };
 
-export const createLinkButton = (baseUrl: string, linkToken: string) => {
+export const createLinkButton = (
+  baseUrl: string,
+  linkToken: string,
+): TemplateMessage => {
   const domain = new URL(baseUrl).origin;
   return {
     "type": "template",
