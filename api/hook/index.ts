@@ -71,6 +71,9 @@ hook.post("*", async (c) => {
         text:
           "連携を解除しました。再度連携する場合は画面下部のメニューをタップしてください。",
       };
+      await replyMessage(CHANNEL_ACCESS_TOKEN!, messageEvent.replyToken, [
+        data,
+      ]);
     }
     if (message == "#エントリー情報") {
       if (!await checkLinked(userId)) {
@@ -102,6 +105,13 @@ hook.post("*", async (c) => {
     const { error } = await supabase.from("profiles").update({
       line_id: lineId,
     }).eq("id", userId);
-    if (error) console.log(error);
+    if (error) {
+      console.log(error);
+      continue;
+    }
+    const data: TextMessage = { type: "text", text: "連携が完了しました。" };
+    await replyMessage(CHANNEL_ACCESS_TOKEN!, accountLinkEvent.replyToken, [
+      data,
+    ]);
   }
 });
