@@ -4,7 +4,7 @@ import { generateNonce } from "./nonce.ts";
 
 export const auth = new Hono();
 
-auth.post("/login", async (c) => {
+auth.post("/link", async (c) => {
   const domain = new URL(c.req.url).origin;
   const { email, password, linkToken } = await c.req.json();
   const { data, error } = await supabase.auth.signInWithPassword({
@@ -39,7 +39,7 @@ auth.post("/login", async (c) => {
             "location.href=" +
             "'" +
             domain +
-            "/login?linkToken=" +
+            "/link?linkToken=" +
             linkToken +
             "'"
           }

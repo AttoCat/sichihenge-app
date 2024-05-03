@@ -1,10 +1,10 @@
 import { Hono } from "hono";
 import { api } from "./api/index.ts";
-import { login } from "./src/Login.tsx";
+import { link } from "./src/Link.tsx";
 
 const app = new Hono();
 
-app.route("/login", login);
+app.route("/link", link);
 app.route("/api", api);
 
 export default app;

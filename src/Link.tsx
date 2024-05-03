@@ -1,10 +1,10 @@
 import { Hono } from "hono";
 import { Layout } from "./Layout.tsx";
-export const login = new Hono();
+export const link = new Hono();
 
-login.get("/", (c) => {
+link.get("/", (c) => {
   const domain = new URL(c.req.url).origin;
-  const postUrl = domain+"/api/auth/login"
+  const postUrl = domain+"/api/auth/link"
   const linkToken = c.req.query("linkToken");
   if (!linkToken) {
     return c.text("正しいURLでアクセスしてください", 401);
@@ -54,12 +54,6 @@ login.get("/", (c) => {
               </fieldset>
             </div>
             <input type="hidden" name="linkToken" value={linkToken}/>
-            <a
-              href="#"
-              class="text-xs text-gray-600 hover:underline hover:text-blue-600"
-            >
-              Forget Password?
-            </a>
             <div>
               <button class="btn btn-block" id="submit-button" type="submit">Login</button>
             </div>

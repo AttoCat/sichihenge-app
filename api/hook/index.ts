@@ -5,6 +5,7 @@ import { supabase } from "../supabaseClient.ts";
 import {
   AccountLinkEvent,
   MessageEvent,
+  TemplateMessage,
   TextMessage,
   Webhook,
   WebhookEvent,
@@ -40,10 +41,18 @@ hook.post("*", async (c) => {
     const message = messageEvent.message.text;
     if (message == "#アカウント連携") {
       if (await checkLinked(userId)) {
-        const data: TextMessage = {
-          type: "text",
-          text:
-            "すでに連携済みです。解除する場合 #アカウント連携解除 と送信してください。",
+        const data: TemplateMessage = {
+          "type": "template",
+          "altText": "Account Link",
+          "template": {
+            "type": "buttons",
+            "text": "すでに連携済みです。連携を解除しますか？",
+            "actions": [{
+              "type": "message",
+              "label": "解除する",
+              "text": "#アカウント連携解除",
+            }],
+          },
         };
         await replyMessage(CHANNEL_ACCESS_TOKEN!, messageEvent.replyToken, [
           data,
@@ -98,7 +107,7 @@ hook.post("*", async (c) => {
     const nonce = accountLinkEvent.link.nonce;
     const lineId = accountLinkEvent.source?.userId;
     const kv = await Deno.openKv();
-    const result = await kv.get<string>([nonce], { consistency: "eventual" });
+    const result = await kv.get<string>([nonce]);
     const userId = result.value;
     if (!userId) continue;
     await kv.close();
