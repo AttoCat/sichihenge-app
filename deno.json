@@ -1,11 +1,11 @@
 {
   "imports": {
-    "hono": "https://deno.land/x/hono@v4.1.5/mod.ts",
+    "hono": "https://deno.land/x/hono@v4.3.5/mod.ts",
     "supabase": "npm:@supabase/supabase-js@2.41.1",
-    "hono/jsx/jsx-runtime": "https://deno.land/x/hono@v4.1.5/jsx/jsx-runtime.ts",
-    "hono/middleware": "https://deno.land/x/hono@v4.1.5/middleware.ts",
-    "hono/streaming": "https://deno.land/x/hono@v4.1.5/jsx/streaming.ts",
-    "hono/helpers": "https://deno.land/x/hono@v4.1.5/helper.ts"
+    "hono/jsx/jsx-runtime": "https://deno.land/x/hono@v4.3.5/jsx/jsx-runtime.ts",
+    "hono/middleware": "https://deno.land/x/hono@v4.3.5/middleware.ts",
+    "hono/streaming": "https://deno.land/x/hono@v4.3.5/jsx/streaming.ts",
+    "hono/helpers": "https://deno.land/x/hono@v4.3.5/helper.ts"
   },
   "tasks": {
     "dev": "deno run --allow-net --watch main.ts",
