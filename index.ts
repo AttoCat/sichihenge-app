@@ -7,6 +7,4 @@ const app = new Hono();
 app.route("/link", link);
 app.route("/api", api);
 
-export default app;
-
 Deno.serve(app.fetch);
