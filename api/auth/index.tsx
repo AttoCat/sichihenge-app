@@ -145,5 +145,5 @@ const getNextEntryNumber = async () => {
     return 0;
   }
   console.log("Current last user id" ,count)
-  return count + 1;
+  return count;
 };
