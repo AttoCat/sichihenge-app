@@ -139,11 +139,16 @@ auth.post("/signup", async (c) => {
 });
 
 const getNextEntryNumber = async () => {
-  const { data: lastUser, error ,count} = await supabase
-    .from("profiles").select("*",{count:"exact",head:true})
+  const {
+    data: lastUser,
+    error,
+    count,
+  } = await supabase
+    .from("profiles")
+    .select("*", { count: "exact", head: true });
   if (!lastUser) {
     return null;
   }
-  console.log("Current last user id" ,count)
+  console.log("Current last user id", count);
   return count! + 1;
 };
