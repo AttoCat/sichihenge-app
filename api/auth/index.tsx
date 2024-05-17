@@ -146,5 +146,5 @@ const getNextEntryNumber = async () => {
     .from("profiles")
     .select("*", { count: "exact", head: true });
   console.log("Current last user id", count);
-  return count! + 1;
+  return count;
 };
