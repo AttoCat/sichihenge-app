@@ -108,6 +108,7 @@ hook.post("*", async (c) => {
     const lineId = accountLinkEvent.source?.userId;
     const kv = await Deno.openKv();
     const result = await kv.get<string>([nonce]);
+    console.log(nonce,lineId,result)
     const userId = result.value;
     if (!userId) continue;
     await kv.close();
