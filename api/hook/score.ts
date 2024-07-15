@@ -12,7 +12,7 @@ export const composePaperResult = (
   paperResult: Awaited<ReturnType<typeof getPaperResult>>,
 ) => {
   const text = `【成績照会】
-No. ${paperResult.entry_number}
+No.${paperResult.entry_number}
 
 得点: ${paperResult.score}点
 順位: ${paperResult.rank}位
