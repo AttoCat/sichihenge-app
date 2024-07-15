@@ -11,6 +11,7 @@ import {
   WebhookEvent,
 } from "../types.ts";
 import { checkLinked, createLinkButton, issueLinkToken } from "./link.ts";
+import { composePaperResult, getPaperResult } from "./score.ts";
 import { composeUserInfo, getUserInfo } from "./user.ts";
 
 export const hook = new Hono();
@@ -99,6 +100,25 @@ hook.post("*", async (c) => {
       if (!userInfo) continue;
       await replyMessage(CHANNEL_ACCESS_TOKEN!, messageEvent.replyToken, [
         composeUserInfo(userInfo),
+      ]);
+    }
+    if (message == "#成績照会") {
+      if (!await checkLinked(userId)) {
+        const data: TextMessage = {
+          type: "text",
+          text: "まずはアカウント連携を行ってください。",
+        };
+        await replyMessage(CHANNEL_ACCESS_TOKEN!, messageEvent.replyToken, [
+          data,
+        ]);
+        continue;
+      }
+      const userInfo = await getUserInfo(userId);
+      if (!userInfo) continue;
+      const paperResult = await getPaperResult(userInfo.entry_number!);
+      const data = composePaperResult(paperResult);
+      await replyMessage(CHANNEL_ACCESS_TOKEN!, messageEvent.replyToken, [
+        data,
       ]);
     }
   }
