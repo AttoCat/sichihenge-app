@@ -21,7 +21,7 @@ export const composeUserInfo = (user: Tables<"profiles">): TextMessage => {
 ふりがな: ${user.full_name_kana}
 ハンドルネーム: ${user.handle_name}
 所属教育機関: ${user.school}
-本名を使用しない場所: ${privacy}
+本名の代わりにハンドルネームを使用する場所: ${privacy}
 
 変更を希望する場合、公式Twitter(X)または sichihenge.cup@gmail.com までご連絡ください。
 
