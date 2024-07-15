@@ -14,14 +14,13 @@ export const composePaperResult = (
   const text = `【成績照会】
 No. ${paperResult.entry_number}
 
-得点: ${paperResult.score}
-順位: ${paperResult.rank}
+得点: ${paperResult.score}点
+順位: ${paperResult.rank}位
 
 ぜひ当日配布した「参加者カード」にご記入ください。
 ご参加誠にありがとうございました！
 
-※運営の不手際により誤った順位で大会を進行したことを深くお詫び申し上げます。こちらの順位が正しいものです。深くお詫び申し上げます。
-`;
+※運営の不手際により誤った順位で大会を進行したことを深くお詫び申し上げます。こちらの順位が正しいものです。深くお詫び申し上げます。`;
   const message: TextMessage = { "type": "text", text: text };
   return message;
 };
